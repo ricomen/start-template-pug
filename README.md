@@ -22,10 +22,10 @@
 </tr>
 <tr>
 <td><code>smart-grid.bat</code></td>
-<td>Генерирует примесь адаптиной сетки на flex(настройки сетки в <code>gulpfile.js</code>)</td>
+<td>Генерирует примеси адаптивной сетки на flex(настройки сетки в <code>gulpfile.js</code>) кидает в папку <code>./less/global</code></td>
 </tr>
 <tr>
-<td><code>npm run build</code></td>
+<td><code>build.bat</code></td>
 <td>Сборка проекта (минифицированый вид, как результат работы)</td>
 </tr>
 <tr>

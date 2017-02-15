@@ -22,7 +22,7 @@
 </tr>
 <tr>
 <td><code>smart-grid.bat</code></td>
-<td>Генерирует примеси адаптивной сетки на flex(настройки сетки в <code>gulpfile.js</code>) кидает в папку <code>./less/global</code></td>
+<td>Генерирует примеси адаптивной сетки на flex (настройки сетки в <code>gulpfile.js</code>) кидает в папку <code>./less/global</code></td>
 </tr>
 <tr>
 <td><code>build.bat</code></td>
@@ -30,7 +30,7 @@
 </tr>
 <tr>
 <td><code>sprite.bat</code></td>
-<td>Сборка спрайта<code>.img/icons</code>)</td>
+<td>Сборка спрайта <code>.img/icons</code></td>
 </tr>
 </tbody></table>
 

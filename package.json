@@ -1,0 +1,39 @@
+{
+  "name": "myProject",
+  "version": "1.0.0",
+  "description": "Start a library of blocks and technical solutions for HTML/CSS/js page layout.",  
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Timur Khamitov",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ricomen/start-template-pug.git"
+  },
+  "devDependencies": {
+    "animate.css": "^3.5.2",
+    "browser-sync": "^2.15.0",
+    "del": "^2.2.2",
+    "emitty": "^1.3.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-cache": "^0.4.5",
+    "gulp-concat": "^2.6.0",
+    "gulp-csscomb": "^3.0.8",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-imagemin": "^3.0.3",
+    "gulp-less": "^3.1.0",
+    "gulp-merge-media-queries": "^0.2.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-pug-linter": "^0.4.1",
+    "gulp-pug2": "0.0.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglifyjs": "^0.6.2",
+    "gulp.spritesmith": "^6.2.1",
+    "imagemin-pngquant": "^5.0.0",    
+    "mkdirp": "^0.5.1",
+    "normalize.less": "^1.0.0",
+    "smart-grid": "^1.0.0"
+  }
+}

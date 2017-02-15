@@ -1,0 +1,119 @@
+.modal {
+  &-content { 
+  display: none; 
+  position: fixed;
+  top: 50%;
+  left: 50%;  
+  z-index: 30;
+  margin-left: -150px;
+  margin-top: -150px;  
+  &-overlay {
+   display: none;
+   position: fixed;   
+   top: 0;
+   left: 0;   
+   z-index: 0;
+   width: 100%;
+   height: 100%;
+   background-color: #000; 
+   transition: opacity 0.3s ease-in-out;  
+   }
+  &--opacity {
+    opacity: 0;
+    }
+  &--show {
+    display: block;
+    }
+  }
+  &-map {   
+    display: none; 
+    position: absolute;
+    left: 50%;
+    margin-left: -480px;
+    top: 50%;
+    margin-top: -250px;
+    z-index: 30;
+    width: 960px;
+    height: 500px;
+    background-color: #ccc;
+    box-shadow: 0px 0px 200px 25px rgba(255, 255, 255, 0.8);
+    &--show {                
+      display: block;
+      animation: bounce 1s;
+    }
+    @media @tablet {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+    &__close {
+      cursor: pointer;      
+      position: absolute;
+      z-index: 30;
+      width: 30px;      
+      height: 30px;
+      right: -50px;
+      top: 0;
+      border-radius: 50%;      
+      border: 3px solid #fff;
+      outline: none;
+      transition: 0.3s ease-in-out;
+      background-color: #000;
+      @media @tablet {
+      top: 10px;
+      right: 10px;
+      width: 50px;      
+      height: 50px;   
+     }
+      &:hover {
+        box-shadow: 0px 0px 5px 2px rgba(255, 255, 255, 0.5);        
+        transform: rotate(90deg);
+      }
+      &::before,
+      &::after {
+        position: absolute;
+        content: "";
+        background-color: #fff;
+        width: 16px;
+        height: 2px;
+        left: 50%;
+        margin-left: -8px;
+        top: 50%;
+        margin-top: -1.5px;  
+        transform: rotate(-45deg); 
+        @media @tablet {
+          width: 24px;
+          height: 4px;
+          left: 50%;
+          margin-left: -12px;
+          top: 50%;
+          margin-top: -1.5px;  
+        }     
+      }
+      &::after {
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
+ #map_canvas {
+  width: 100%;
+  height: 100%;  
+} 
+@keyframes bounce {
+  0% {
+    transform: translateY(-2000px);
+  }
+  70% {
+    transform: translateY(30px);
+  }
+  90% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

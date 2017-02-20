@@ -1,0 +1,15 @@
+mixin subscribe(btnText, placeholder, method)
+  .subscribe
+    h2.subscribe__title Subscribe to my Newsletter
+    form.subscribe__form(action='/', method=method)      
+      input.subscribe__form-field(type="text"
+                                  name="subscribe"
+                                  placeholder=placeholder) 
+      button.subscribe__btn(type=btnText) #{btnText}
+
+mixin icon(name , size, mod)
+  - mod = mod || ''
+  svg(width=size height=size class="icon icon-" + name + ' ' + mod data-img="img/icons/" + name + ".png")
+    use(xlink:href="#icon-" + name)
+  noscript
+    img(src="img/icons/" + name + ".png" alt="icon" width=size height=size)

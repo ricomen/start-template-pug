@@ -34,6 +34,10 @@
 <td><code>sprite.bat</code></td>
 <td>Сборка спрайта <code>.img/icons</code></td>
 </tr>
+<tr>
+<td><code>svg-sprite.bat</code></td>
+<td>Сборка svg - спрайта <code>.img/svg</code></td>
+</tr>
 </tbody></table>
 
 ## Парадигма

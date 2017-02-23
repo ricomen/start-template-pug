@@ -9,7 +9,7 @@ mixin subscribe(btnText, placeholder, method)
 
 mixin icon(name , size, mod)
   - mod = mod || ''
-  svg(width=size height=size class="icon icon-" + name + ' ' + mod data-img="img/icons/" + name + ".png")
+  svg(width=size height=size class="icon icon-" + name + ' ' + mod data-img="img/icons/icon-" + name + ".png")
     use(xlink:href="#icon-" + name)
   noscript
-    img(src="img/icons/" + name + ".png" alt="icon" width=size height=size)
+    img(src="img/icons/icon-" + name + ".png" alt="icon" width=size height=size)

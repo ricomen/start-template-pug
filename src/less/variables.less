@@ -1,18 +1,45 @@
-@base-color: #4bcaff;
-@grey-color: #515f67;
-@body-bg: desaturate(red, 10%)  ;
-@body-color: ;
-@link-color: ;
+// Базовые цвета
+// https://colorscheme.ru/color-converter.html
+@black:                       #000;
+@gray-darkest:                #1a1a1a;
+@gray-darker:                 #333;
+@gray-darken:                 #4d4d4d;
+@gray-dark:                   #666;
+@gray:                        #808080;
+@gray-light:                  #999;
+@gray-lighten:                #b3b3b3;
+@gray-lighter:                #ccc;
+@gray-lightest:               #e6e6e6;
+@white:                       #fff;
+
+@color-main:                  #0275d9;
+@color-success:               #5cb75c;
+@color-danger:                #d8544f;
+
+// Семантические цвета
+
+@text-color:                  @gray-darkest;
+@text-color--muted:           @gray;
+@body-bg:                     #fff;
+
+@link-color:                  @color-main;
+@link-color--hover:           darken(@color-main, 15%);
+
+@border-color:                @gray-light;
+
 @font-size: 16px;
+@font-family:                 -apple-system, BlinkMacSystemFont, 'Roboto', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif;
+
 
 @img-folder: "../img/";                //путь до каринок
 @pathToIcon: "../img/icons/";          //путь до иконок
 @font-folder: "../fonts/";             //путь к шрифтам
 
+@small: ~"(max-width: 575px)";
 @phone: ~"(max-width: 767px)";
 @tablet: ~"(max-width: 992px)";
 @desktop: ~"(max-width: 1199px)";
-//@large: ~"(max-width: px)";
+@large: ~"(max-width: 1800px)";
 
 
 //Работа с цветами

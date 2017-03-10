@@ -1,0 +1,35 @@
+html {
+  height: 100%;
+  min-width: 320px;
+}
+body {  
+  font-size: @font-size;
+  line-height: 1.2;
+//font-family: ;
+//color: ;
+//background-color: ;
+//background-image: data-uri("");  
+  min-width: 250px;
+}
+
+img {
+  max-width: 100%;
+  width: auto;
+  border: none;
+}
+
+.container {
+  .center();  
+  .clearfix();
+}
+
+a {
+  color: @link-color;
+  text-decoration: none;
+  background-color: transparent;
+  &:hover,
+  &:focus {
+    color: @link-color--hover;
+    text-decoration: underline;
+  }
+}

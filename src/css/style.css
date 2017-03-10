@@ -429,6 +429,63 @@ template {
   font-weight: @font-weight;
   font-style: @font-style;
 } */
+@media print {
+  *,
+  *:before,
+  *:after {
+    color: #000 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  a,
+  a:visited {
+    text-decoration: underline !important;
+  }
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: "";
+  }
+  pre,
+  blockquote {
+    border: 1px solid #999 !important;
+
+    page-break-inside: avoid;
+  }
+  thead {
+    display: table-header-group;
+  }
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+  img {
+    max-width: 100% !important;
+  }
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+  table {
+    border-collapse: collapse !important;
+  }
+  table td,
+  table th {
+    background-color: #fff !important;
+  }
+}
 @font-face {
   font-family: "Lato";
   font-weight: 900;
@@ -554,4 +611,45 @@ template {
   font-style: italic;
 
   src: url("../fonts/Lato/Lato HairlineItalic/lato-hairlineitalic.woff") format("woff"), url("../fonts/Lato/Lato HairlineItalic/lato-hairlineitalic.woff2") format("woff2");
+}
+html {
+  min-width: 320px;
+  height: 100%;
+}
+body {
+  font-size: 16px;
+  line-height: 1.2;
+
+  min-width: 250px;
+}
+img {
+  width: auto;
+  max-width: 100%;
+
+  border: none;
+}
+.container {
+  margin-right: auto;
+  margin-left: auto;
+}
+.container:before,
+.container:after {
+  display: table;
+
+  content: "";
+}
+.container:after {
+  clear: both;
+}
+a {
+  text-decoration: none;
+
+  color: #0275d9;
+  background-color: transparent;
+}
+a:hover,
+a:focus {
+  text-decoration: underline;
+
+  color: #014c8d;
 }

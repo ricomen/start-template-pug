@@ -1,26 +1,27 @@
-var gulp           = require('gulp');              // Подключаем Gulp
-var less           = require('gulp-less');         // Подключаем Less пакет,
-var browserSync    = require('browser-sync');      // Подключаем Browser Sync
-var concat         = require('gulp-concat');       // Подключаем gulp-concat (для конкатенации файлов)
-var uglify         = require('gulp-uglifyjs');     // Подключаем gulp-uglifyjs (для сжатия JS)
-var cssnano        = require('gulp-cssnano');      // Подключаем пакет для минификации CSS
-var rename         = require('gulp-rename');       // Подключаем библиотеку для переименования файлов
-var del            = require('del');               // Подключаем библиотеку для удаления файлов и папок
-var imagemin       = require('gulp-imagemin');     // Подключаем библиотеку для работы с изображениями
-var pngquant       = require('imagemin-pngquant'); // Подключаем библиотеку для работы с png
-var cache          = require('gulp-cache');        // Подключаем библиотеку кеширования
-var autoprefixer   = require('gulp-autoprefixer'); // Подключаем библиотеку для автоматического добавления префиксов
-var plumber        = require('gulp-plumber');      // Выводим ошибки не останавливая поток
-var csscomb        = require('gulp-csscomb');      // Причесываем CSS
-var spritesmith    = require('gulp.spritesmith');  // Собираем спрайт 
-var svgstore       = require('gulp-svgstore');     // Сборщик спрайта
-var svgmin         = require('gulp-svgmin');       // Минифицируем SVG
-var cheerio        = require('gulp-cheerio');      // Добавление атрибутоп...
-var replace        = require('gulp-replace');
-var smartgrid      = require('smart-grid');        // Сетка Smart-grid
-var pug            = require('gulp-pug2');         // Шаблонизатор PUG
-var eslint         = require('gulp-eslint');       // ES-Linter
-var notify         = require('gulp-notify');       // Вывод уведомлений
+const gulp           = require('gulp');              // Подключаем Gulp
+const less           = require('gulp-less');         // Подключаем Less пакет,
+const browserSync    = require('browser-sync');      // Подключаем Browser Sync
+const concat         = require('gulp-concat');       // Подключаем gulp-concat (для конкатенации файлов)
+const uglify         = require('gulp-uglifyjs');     // Подключаем gulp-uglifyjs (для сжатия JS)
+const cssnano        = require('gulp-cssnano');      // Подключаем пакет для минификации CSS
+const rename         = require('gulp-rename');       // Подключаем библиотеку для переименования файлов
+const del            = require('del');               // Подключаем библиотеку для удаления файлов и папок
+const imagemin       = require('gulp-imagemin');     // Подключаем библиотеку для работы с изображениями
+const pngquant       = require('imagemin-pngquant'); // Подключаем библиотеку для работы с png
+const cache          = require('gulp-cache');        // Подключаем библиотеку кеширования
+const autoprefixer   = require('gulp-autoprefixer'); // Подключаем библиотеку для автоматического добавления префиксов
+const plumber        = require('gulp-plumber');      // Выводим ошибки не останавливая поток
+const csscomb        = require('gulp-csscomb');      // Причесываем CSS
+const spritesmith    = require('gulp.spritesmith');  // Собираем спрайт 
+const svgstore       = require('gulp-svgstore');     // Сборщик спрайта
+const svgmin         = require('gulp-svgmin');       // Минифицируем SVG
+const cheerio        = require('gulp-cheerio');      // Добавление атрибутоп...
+const replace        = require('gulp-replace');
+const smartgrid      = require('smart-grid');        // Сетка Smart-grid
+const pug            = require('gulp-pug2');         // Шаблонизатор PUG
+const eslint         = require('gulp-eslint');       // ES-Linter
+const notify         = require('gulp-notify');       // Вывод уведомлений
+const babel         = require('gulp-babel');
 /*var emitty       = require('emitty').setup('src/pug', 'pug', {
   makeVinylFile: true
 });*/
@@ -62,6 +63,16 @@ gulp.task('lint', function () {
   .pipe(eslint.failAfterError())
 });
 
+//babel
+
+gulp.task('babel', function() {
+  return gulp.src('src/js/es2015/*.js')
+    .pipe(babel({
+        presets: ['es2015']
+    }))
+    .pipe(gulp.dest('src/js/'));
+});
+
 //SVG-спрайт(собирает спрайт и кидает в корень img с расширением HTML)
 gulp.task('svgSprite', function () {
   return gulp.src('src/img/svg/*.svg')    
@@ -86,6 +97,20 @@ gulp.task('svgSprite', function () {
     .pipe(gulp.dest('src/img/'));
 });
 
+//PNG-спрайт(кидает в корень img + css в less/blocks)
+gulp.task('sprite', function () {
+  var spriteData = gulp.src('src/img/icons/*.png')
+  .pipe(spritesmith({
+    imgName: '../img/sprite.png',
+    cssName: 'sprite.css',
+    cssFormat: 'css',
+    algorithm: 'top-down',
+    padding: 10
+  }));
+  spriteData.img.pipe(gulp.dest('src/img/'));
+  spriteData.css.pipe(gulp.dest('src/less/'));
+});
+
 //Шаблонизатор
 gulp.task('pug', function() {
   return gulp.src('src/pug/*.pug')
@@ -103,22 +128,7 @@ gulp.task('less', function() {
     .pipe(less())
     .pipe(autoprefixer(['last 4 versions'], { cascade: true }))
     .pipe(csscomb())
-    .pipe(gulp.dest('src/css'))
-    
-});
-
-//PNG-спрайт(кидает в корень img + css в less/blocks)
-gulp.task('sprite', function () {
-  var spriteData = gulp.src('src/img/icons/*.png')
-  .pipe(spritesmith({
-    imgName: '../img/sprite.png',
-    cssName: 'sprite.css',
-    cssFormat: 'css',
-    algorithm: 'top-down',
-    padding: 10
-  }));
-  spriteData.img.pipe(gulp.dest('src/img/'));
-  spriteData.css.pipe(gulp.dest('src/less/'));
+    .pipe(gulp.dest('src/css'))    
 });
 
 //Browser-sync
@@ -169,7 +179,7 @@ gulp.task('clean', function() {
 
 //Оптимиация изображений
 gulp.task('img', function() {
-  return gulp.src('src/img/*.*')
+  return gulp.src('src/img/**/*.*')
     .pipe(cache(imagemin({
       interlaced: true,
       progressive: true,
@@ -180,7 +190,7 @@ gulp.task('img', function() {
 });
 
 //Выгружаем проект в build
-gulp.task('build', ['clean', 'img', 'less', 'scripts'], function() {
+gulp.task('build', ['clean', 'img', 'css-libs', 'scripts'], function() {
 
   var buildCss = gulp.src([ 
       'src/css/*.css',

@@ -1,27 +1,27 @@
-const gulp           = require('gulp');              // Подключаем Gulp
-const less           = require('gulp-less');         // Подключаем Less пакет,
-const browserSync    = require('browser-sync');      // Подключаем Browser Sync
-const concat         = require('gulp-concat');       // Подключаем gulp-concat (для конкатенации файлов)
-const uglify         = require('gulp-uglifyjs');     // Подключаем gulp-uglifyjs (для сжатия JS)
-const cssnano        = require('gulp-cssnano');      // Подключаем пакет для минификации CSS
-const rename         = require('gulp-rename');       // Подключаем библиотеку для переименования файлов
-const del            = require('del');               // Подключаем библиотеку для удаления файлов и папок
-const imagemin       = require('gulp-imagemin');     // Подключаем библиотеку для работы с изображениями
-const pngquant       = require('imagemin-pngquant'); // Подключаем библиотеку для работы с png
-const cache          = require('gulp-cache');        // Подключаем библиотеку кеширования
-const autoprefixer   = require('gulp-autoprefixer'); // Подключаем библиотеку для автоматического добавления префиксов
-const plumber        = require('gulp-plumber');      // Выводим ошибки не останавливая поток
-const csscomb        = require('gulp-csscomb');      // Причесываем CSS
-const spritesmith    = require('gulp.spritesmith');  // Собираем спрайт 
-const svgstore       = require('gulp-svgstore');     // Сборщик спрайта
-const svgmin         = require('gulp-svgmin');       // Минифицируем SVG
-const cheerio        = require('gulp-cheerio');      // Добавление атрибутоп...
+const gulp           = require('gulp');
+const less           = require('gulp-less');
+const browserSync    = require('browser-sync');
+const concat         = require('gulp-concat');
+const uglify         = require('gulp-uglifyjs');
+const cssnano        = require('gulp-cssnano');
+const rename         = require('gulp-rename');
+const del            = require('del');
+const imagemin       = require('gulp-imagemin');
+const pngquant       = require('imagemin-pngquant');
+const cache          = require('gulp-cache');
+const autoprefixer   = require('gulp-autoprefixer');
+const plumber        = require('gulp-plumber');
+const csscomb        = require('gulp-csscomb');
+const spritesmith    = require('gulp.spritesmith');
+const svgstore       = require('gulp-svgstore');
+const svgmin         = require('gulp-svgmin');
+const cheerio        = require('gulp-cheerio');
 const replace        = require('gulp-replace');
-const smartgrid      = require('smart-grid');        // Сетка Smart-grid
-const pug            = require('gulp-pug2');         // Шаблонизатор PUG
-const eslint         = require('gulp-eslint');       // ES-Linter
-const notify         = require('gulp-notify');       // Вывод уведомлений
-const babel         = require('gulp-babel');
+const smartgrid      = require('smart-grid');
+const pug            = require('gulp-pug2');
+const eslint         = require('gulp-eslint');
+const notify         = require('gulp-notify');
+const babel          = require('gulp-babel');
 /*var emitty       = require('emitty').setup('src/pug', 'pug', {
   makeVinylFile: true
 });*/
@@ -64,7 +64,6 @@ gulp.task('lint', function () {
 });
 
 //babel
-
 gulp.task('babel', function() {
   return gulp.src('src/js/es2015/*.js')
     .pipe(babel({
@@ -163,7 +162,7 @@ gulp.task('css-libs', ['less'], function() {
 });
 
 //Основной таск
-gulp.task('watch', ['browser-sync', 'lint'], function() {
+gulp.task('watch', ['browser-sync', 'less'], function() {
   gulp.watch('src/less/**/*.less', ['less']);
   gulp.watch('src/pug/**/*.pug', ['pug']);
   gulp.watch('src/js/main.js', ['lint']);

@@ -1,30 +1,28 @@
-const gulp           = require('gulp');
-const less           = require('gulp-less');
-const browserSync    = require('browser-sync');
-const concat         = require('gulp-concat');
-const uglify         = require('gulp-uglifyjs');
-const cssnano        = require('gulp-cssnano');
-const rename         = require('gulp-rename');
-const del            = require('del');
-const imagemin       = require('gulp-imagemin');
-const pngquant       = require('imagemin-pngquant');
-const cache          = require('gulp-cache');
-const autoprefixer   = require('gulp-autoprefixer');
-const plumber        = require('gulp-plumber');
-const csscomb        = require('gulp-csscomb');
-const spritesmith    = require('gulp.spritesmith');
-const svgstore       = require('gulp-svgstore');
-const svgmin         = require('gulp-svgmin');
-const cheerio        = require('gulp-cheerio');
-const replace        = require('gulp-replace');
-const smartgrid      = require('smart-grid');
-const pug            = require('gulp-pug2');
-const eslint         = require('gulp-eslint');
-const notify         = require('gulp-notify');
-const babel          = require('gulp-babel');
-/*var emitty       = require('emitty').setup('src/pug', 'pug', {
-  makeVinylFile: true
-});*/
+const gulp         = require('gulp');
+var sass           = require('gulp-sass');
+const browserSync  = require('browser-sync');
+const concat       = require('gulp-concat');
+const uglify       = require('gulp-uglifyjs');
+const cssnano      = require('gulp-cssnano');
+const rename       = require('gulp-rename');
+const del          = require('del');
+const imagemin     = require('gulp-imagemin');
+const pngquant     = require('imagemin-pngquant');
+const cache        = require('gulp-cache');
+const autoprefixer = require('gulp-autoprefixer');
+const plumber      = require('gulp-plumber');
+const csscomb      = require('gulp-csscomb');
+const spritesmith  = require('gulp.spritesmith');
+const svgstore     = require('gulp-svgstore');
+const svgmin       = require('gulp-svgmin');
+const cheerio      = require('gulp-cheerio');
+const replace      = require('gulp-replace');
+const smartgrid    = require('smart-grid');
+const pug          = require('gulp-pug2');
+const eslint       = require('gulp-eslint');
+const notify       = require('gulp-notify');
+const babel        = require('gulp-babel');
+
 
 //ES-Linter
 gulp.task('lint', function () {
@@ -120,14 +118,14 @@ gulp.task('pug', function() {
     .pipe(gulp.dest('src/'))
 });
 
-//LESS-препроцессор
-gulp.task('less', function() {
-  gulp.src('src/less/style.less')
+//SASS-препроцессор
+gulp.task('sass', function() {
+  gulp.src('src/sass/style.scss')
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-    .pipe(less())
+    .pipe(sass())
     .pipe(autoprefixer(['last 4 versions'], { cascade: true }))
     .pipe(csscomb())
-    .pipe(gulp.dest('src/css'))    
+    .pipe(gulp.dest('src/css'))
 });
 
 //Browser-sync
@@ -154,7 +152,7 @@ gulp.task('scripts', function() {
 });
 
 //Минимизируем css, добавляем префикс min
-gulp.task('css-libs', ['less'], function() {
+gulp.task('css-libs', ['sass'], function() {
   return gulp.src('src/css/style.css')
       .pipe(cssnano())
       .pipe(rename({suffix: '.min'}))
@@ -162,8 +160,8 @@ gulp.task('css-libs', ['less'], function() {
 });
 
 //Основной таск
-gulp.task('watch', ['browser-sync', 'less'], function() {
-  gulp.watch('src/less/**/*.less', ['less']);
+gulp.task('watch', ['browser-sync', 'sass'], function() {
+  gulp.watch('src/less/**/*.scss', ['sass']);
   gulp.watch('src/pug/**/*.pug', ['pug']);
   gulp.watch('src/js/main.js', ['lint']);
   gulp.watch('src/*.html', browserSync.reload);
@@ -207,7 +205,7 @@ gulp.task('build', ['clean', 'img', 'css-libs', 'scripts'], function() {
 
 });
 
-//Читка кэша
+//Чиcтка кэша
 gulp.task('clear', function () {
   return cache.clearAll();
 })
@@ -217,7 +215,7 @@ gulp.task('default', ['watch']);
 //Генератор  примесей для адаптивной сетки(Flex)
 gulp.task('smartgrid', function () {
     var settings = {
-    outputStyle: 'less',
+    outputStyle: 'scss',
         columns: 12,
             tab: "  ",
          offset: "30px", 
@@ -241,7 +239,7 @@ gulp.task('smartgrid', function () {
            }
         }
     };
-    smartgrid('./src/less/global', settings);
+    smartgrid('./src/sass/', settings);
 });
 
 

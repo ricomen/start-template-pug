@@ -1,5 +1,5 @@
 const gulp         = require('gulp');
-var sass           = require('gulp-sass');
+const sass         = require('gulp-sass');
 const browserSync  = require('browser-sync');
 const concat       = require('gulp-concat');
 const uglify       = require('gulp-uglifyjs');
@@ -10,7 +10,6 @@ const imagemin     = require('gulp-imagemin');
 const pngquant     = require('imagemin-pngquant');
 const cache        = require('gulp-cache');
 const autoprefixer = require('gulp-autoprefixer');
-const plumber      = require('gulp-plumber');
 const csscomb      = require('gulp-csscomb');
 const spritesmith  = require('gulp.spritesmith');
 const svgstore     = require('gulp-svgstore');
@@ -121,8 +120,7 @@ gulp.task('pug', function() {
 //SASS-препроцессор
 gulp.task('sass', function() {
   gulp.src('src/sass/style.scss')
-    .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-    .pipe(sass())
+    .pipe(sass().on('error', notify.onError("Error: <%= error.message %>"))) 
     .pipe(autoprefixer(['last 4 versions'], { cascade: true }))
     .pipe(csscomb())
     .pipe(gulp.dest('src/css'))
@@ -161,7 +159,7 @@ gulp.task('css-libs', ['sass'], function() {
 
 //Основной таск
 gulp.task('watch', ['browser-sync', 'sass'], function() {
-  gulp.watch('src/less/**/*.scss', ['sass']);
+  gulp.watch('src/sass/**/*.scss', ['sass']);
   gulp.watch('src/pug/**/*.pug', ['pug']);
   gulp.watch('src/js/main.js', ['lint']);
   gulp.watch('src/*.html', browserSync.reload);

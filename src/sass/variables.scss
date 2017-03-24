@@ -1,4 +1,3 @@
-// Базовые цвета
 // https://colorscheme.ru/color-converter.html
 $black:          #000;
 $gray-darkest:   #1a1a1a;
@@ -18,19 +17,17 @@ $color-danger:   #d8544f;
 
 
 
-@font-size: 16px;
-@font-family:                 -apple-system, BlinkMacSystemFont, 'Roboto', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif;
+$font-size: 16px;
+$font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif;
 
+$pathToIcon: "../img/icons";          //путь до иконок
+$font-folder: "../fonts";             //путь к шрифтам
 
-@img-folder: "../img/";                //путь до каринок
-@pathToIcon: "../img/icons/";          //путь до иконок
-@font-folder: "../fonts/";             //путь к шрифтам
-
-@small: ~"(max-width: 575px)";
-@phone: ~"(max-width: 767px)";
-@tablet: ~"(max-width: 992px)";
-@desktop: ~"(max-width: 1199px)";
-@large: ~"(max-width: 1800px)";
+$small: "screen and (max-width: 575px)";
+$phone: "screen and (max-width: 767px)";
+$tablet: "screen and (max-width: 992px)";
+$desktop: "screen and (max-width: 1199px)";
+$large: "screen and (max-width: 1800px)";
 
 
 //Работа с цветами

@@ -1,18 +1,16 @@
 //@import (less) "global/bootstrap.css";
-@import "../../node_modules/normalize.less/normalize.less";
-@import "variables.less";
-@import "mixins.less";
-@import "print.less";
-@import "fonts.less";
-@import "scaffolding.less";
-@import "blocks/page-header.less";
-@import "blocks/logo.less";
-@import "blocks/main-nav.less";
-@import "blocks/slider.less";
-@import "blocks/page-main.less";
-@import "blocks/page-footer.less";
-@import "blocks/social.less";
-//@import "blocks/modal.less";
-//@import (less) "../../node_modules/animate.css";
-
-
+//@import "../../node_modules/normalize.css/normalize";
+@import "variables";
+@import "mixins";
+@import "fonts";
+@import "scaffolding";
+@import "blocks/page-header";
+@import "blocks/logo";
+@import "blocks/main-nav";
+@import "blocks/slider";
+@import "blocks/page-main";
+@import "blocks/page-footer";
+@import "blocks/social";
+//@import "print";
+//@import "blocks/modal.scss";
+//@import "../../node_modules/animate.css/animate";

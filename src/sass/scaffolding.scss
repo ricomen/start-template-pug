@@ -1,34 +1,37 @@
 html {
   height: 100%;
-  min-width: 320px;
-  font-size: @font-size;
+  font-size: $font-size;  
 }
-body {
+body {  
+  min-width: 320px;
+  word-wrap: break-word;
 //font-family: ;
 //color: ;
 //background-color: ;
-//background-image: data-uri("");  
+//background-image: data-uri("");    
   
 }
 
 img {
   max-width: 100%;
-  width: auto;
+  height: auto;
   border: none;
 }
 
 .container {
-  .center();  
-  .clearfix();
+  @include center();  
+  @include clearfix();
+  // @media $phone {
+  //   display: block;
+  // }
 }
 
-a {
-  color: @link-color;
-  text-decoration: none;
-  background-color: transparent;
-  &:hover,
-  &:focus {
-    color: @link-color--hover;
-    text-decoration: underline;
-  }
-}
+// a {  
+//   text-decoration: none;
+//   background-color: transparent;
+//   &:hover,
+//   &:focus {
+//     color: $link-color--hover;
+//     text-decoration: underline;
+//   }
+// }

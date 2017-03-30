@@ -1,24 +1,9 @@
-// https://colorscheme.ru/color-converter.html
-$black:          #000;
-$gray-darkest:   #1a1a1a;
-$gray-darker:    #333;
-$gray-darken:    #4d4d4d;
-$gray-dark:      #666;
-$gray:           #808080;
-$gray-light:     #999;
-$gray-lighten:   #b3b3b3;
-$gray-lighter:   #ccc;
-$gray-lightest:  #e6e6e6;
-$white:          #fff;
+$link: #000;
+$bg: #fff;
 
-$color-main:     #0275d9;
-$color-success:  #5cb75c;
-$color-danger:   #d8544f;
-
-
-
-$font-size: 16px;
-$font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif;
+$fz: 16px;
+$ff: "Arial", sans-serif;
+//$font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif;
 
 $pathToIcon: "../img/icons";          //путь до иконок
 $font-folder: "../fonts";             //путь к шрифтам

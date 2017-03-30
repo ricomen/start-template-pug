@@ -1,11 +1,11 @@
 html {
   height: 100%;
-  font-size: $font-size;  
+  font-size: $fz;  
 }
 body {  
   min-width: 320px;
   word-wrap: break-word;
-//font-family: ;
+  font-family: $ff ;
 //color: ;
 //background-color: ;
 //background-image: data-uri("");    
@@ -35,3 +35,8 @@ img {
 //     text-decoration: underline;
 //   }
 // }
+
+//от переполнения тпекстом
+// white-space: nowrap;
+// overflow: hidden;
+// text-overflow: ellipsis;

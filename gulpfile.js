@@ -160,8 +160,7 @@ gulp.task('css-libs', ['sass'], function() {
 //Основной таск
 gulp.task('watch', ['browser-sync', 'sass'], function() {
   gulp.watch('src/sass/**/*.scss', ['sass']);
-  gulp.watch('src/pug/**/*.pug', ['pug']);
-  gulp.watch('src/js/main.js', ['lint']);
+  gulp.watch('src/pug/**/*.pug', ['pug']);  
   gulp.watch('src/*.html', browserSync.reload);
   gulp.watch('src/css/*.css', browserSync.reload);
   gulp.watch('src/js/**/*.js', browserSync.reload);

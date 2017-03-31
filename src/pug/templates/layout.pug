@@ -1,17 +1,35 @@
+//-Адаптивность
+- var adaptive = false
+
+//-Ширина вьюпорта
+- var width = 1200
+
+//-Заголовок сайта
+- var title = "Project"
+
+//-Мета title
+- var titleContent = "..."
+
+//-Описание страницы сайта.(Размер meta description не должен превышать 100-140 символов. Не должен совпадать с тегами Title, h1, с текстом или дублировать их. Иначе он не будет использоваться. Отсутствие вводных слов. Лучше, чтобы содержал название компании и/или телефон. В конце ставим точку)
+- var descriptionContent = "..."
+
+//-Ключевые слова сайта.()
+- var keywordsContent = "..."
+
 doctype html
 html(lang="ru")
   head
     meta(charset="utf-8")
-    title()
+    title= title
     meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
-    meta(name="viewport" content="width=device-width, initial-scale=1")
-    include ../includes/favicons
-    meta(name="robots" content="index, follow")
-    meta(name="title" content="...")
-    meta(name="description" content="...")
-    meta(name="keywords" content="...")
-    meta(name="..." content="...")
+    meta(name="viewport" content=adaptive ? "width=device-width, initial-scale=1" : "width=" + width)
+    //-include ../includes/favicons
+    //-meta(name="robots" content="index, follow")
+    //-meta(name="title" content= titleContent)
+    //-meta(name="description" content= descriptionContent)
+    //-meta(name="keywords" content= keywordsContent)
+    //-meta(name="..." content="...")
     link(rel="stylesheet" href="css/style.css")
-  body
+  body    
     block main
     

@@ -1,27 +1,28 @@
-const gulp         = require('gulp');
-const sass         = require('gulp-sass');
-const browserSync  = require('browser-sync');
-const concat       = require('gulp-concat');
-const uglify       = require('gulp-uglifyjs');
-const cssnano      = require('gulp-cssnano');
-const rename       = require('gulp-rename');
-const del          = require('del');
-const imagemin     = require('gulp-imagemin');
-const pngquant     = require('imagemin-pngquant');
-const cache        = require('gulp-cache');
-const autoprefixer = require('gulp-autoprefixer');
-const csscomb      = require('gulp-csscomb');
-const spritesmith  = require('gulp.spritesmith');
-const svgstore     = require('gulp-svgstore');
-const svgmin       = require('gulp-svgmin');
-const cheerio      = require('gulp-cheerio');
-const replace      = require('gulp-replace');
-const smartgrid    = require('smart-grid');
-const pug          = require('gulp-pug2');
-const eslint       = require('gulp-eslint');
-const notify       = require('gulp-notify');
-const babel        = require('gulp-babel');
-
+const gulp           = require('gulp');
+const less           = require('gulp-less');
+const browserSync    = require('browser-sync');
+const concat         = require('gulp-concat');
+const uglify         = require('gulp-uglify');
+const cssnano        = require('gulp-cssnano');
+const rename         = require('gulp-rename');
+const del            = require('del');
+const imagemin       = require('gulp-imagemin');
+const pngquant       = require('imagemin-pngquant');
+const cache          = require('gulp-cache');
+const autoprefixer   = require('gulp-autoprefixer');
+const postcss        = require('gulp-postcss');
+const plumber        = require('gulp-plumber');
+const csscomb        = require('gulp-csscomb');
+const spritesmith    = require('gulp.spritesmith');
+const svgstore       = require('gulp-svgstore');
+const svgmin         = require('gulp-svgmin');
+const cheerio        = require('gulp-cheerio');
+const replace        = require('gulp-replace');
+const smartgrid      = require('smart-grid');
+const pug            = require('gulp-pug2');
+const eslint         = require('gulp-eslint');
+const notify         = require('gulp-notify');
+const babel          = require('gulp-babel');
 
 //ES-Linter
 gulp.task('lint', function () {
@@ -60,7 +61,6 @@ gulp.task('lint', function () {
   .pipe(eslint.failAfterError())
 });
 
-//babel
 gulp.task('babel', function() {
   return gulp.src('src/js/es2015/*.js')
     .pipe(babel({
@@ -93,6 +93,33 @@ gulp.task('svgSprite', function () {
     .pipe(gulp.dest('src/img/'));
 });
 
+//Шаблонизатор
+gulp.task('pug', function() {
+  return gulp.src('src/pug/*.pug')
+    .pipe(pug({}).on( "error", notify.onError({
+      message: "<%= error.message %>",
+      title  : "Pug Error!"
+      })))
+    .pipe(gulp.dest('src/'))
+});
+
+//LESS-препроцессор
+gulp.task('less', function() {
+  gulp.src('src/less/style.less')
+    .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+    .pipe(less())
+    .pipe(autoprefixer(['last 4 versions'], { cascade: true }))
+    .pipe(csscomb())
+    .pipe(gulp.dest('src/css'))
+});
+
+//PostCSS
+gulp.task('css', function () {
+    return gulp.src('./src/*.css')
+        .pipe(postcss())
+        .pipe(gulp.dest('./dest'));
+});
+
 //PNG-спрайт(кидает в корень img + css в less/blocks)
 gulp.task('sprite', function () {
   var spriteData = gulp.src('src/img/icons/*.png')
@@ -105,25 +132,6 @@ gulp.task('sprite', function () {
   }));
   spriteData.img.pipe(gulp.dest('src/img/'));
   spriteData.css.pipe(gulp.dest('src/less/'));
-});
-
-//Шаблонизатор
-gulp.task('pug', function() {
-  return gulp.src('src/pug/*.pug')
-    .pipe(pug({}).on( "error", notify.onError({
-      message: "<%= error.message %>",
-      title  : "Pug Error!"
-      })))
-    .pipe(gulp.dest('src/'))
-});
-
-//SASS-препроцессор
-gulp.task('sass', function() {
-  gulp.src('src/sass/style.scss')
-    .pipe(sass().on('error', notify.onError("Error: <%= error.message %>"))) 
-    .pipe(autoprefixer(['last 4 versions'], { cascade: true }))
-    .pipe(csscomb())
-    .pipe(gulp.dest('src/css'))
 });
 
 //Browser-sync
@@ -140,9 +148,7 @@ gulp.task('browser-sync', function() {
 gulp.task('scripts', function() {
   return gulp.src([
     'src/js/libs/jquery/dist/jquery.min.js',
-    'src/js/libs/magnific-popup/dist/jquery.magnific-popup.min.js',
-    'node_modules/html5shiv/disthtml5shiv.min.js',
-    'node_modules/es5-shim/es5-sham.min.js'
+    'src/js/libs/magnific-popup/dist/jquery.magnific-popup.min.js'
     ])
     .pipe(concat('libs.min.js'))
     .pipe(uglify())
@@ -150,7 +156,7 @@ gulp.task('scripts', function() {
 });
 
 //Минимизируем css, добавляем префикс min
-gulp.task('css-libs', ['sass'], function() {
+gulp.task('css-libs', ['less'], function() {
   return gulp.src('src/css/style.css')
       .pipe(cssnano())
       .pipe(rename({suffix: '.min'}))
@@ -158,8 +164,8 @@ gulp.task('css-libs', ['sass'], function() {
 });
 
 //Основной таск
-gulp.task('watch', ['browser-sync', 'sass'], function() {
-  gulp.watch('src/sass/**/*.scss', ['sass']);
+gulp.task('watch', ['browser-sync', 'lint'], function() {
+  gulp.watch('src/less/**/*.less', ['less']);
   gulp.watch('src/pug/**/*.pug', ['pug']);  
   gulp.watch('src/*.html', browserSync.reload);
   gulp.watch('src/css/*.css', browserSync.reload);
@@ -173,7 +179,7 @@ gulp.task('clean', function() {
 
 //Оптимиация изображений
 gulp.task('img', function() {
-  return gulp.src('src/img/**/*.*')
+  return gulp.src('src/img/*.*')
     .pipe(cache(imagemin({
       interlaced: true,
       progressive: true,
@@ -184,7 +190,7 @@ gulp.task('img', function() {
 });
 
 //Выгружаем проект в build
-gulp.task('build', ['clean', 'img', 'css-libs', 'scripts'], function() {
+gulp.task('build', ['clean', 'img', 'less', 'scripts'], function() {
 
   var buildCss = gulp.src([ 
       'src/css/*.css',
@@ -202,7 +208,7 @@ gulp.task('build', ['clean', 'img', 'css-libs', 'scripts'], function() {
 
 });
 
-//Чиcтка кэша
+//Читка кэша
 gulp.task('clear', function () {
   return cache.clearAll();
 })
@@ -212,7 +218,7 @@ gulp.task('default', ['watch']);
 //Генератор  примесей для адаптивной сетки(Flex)
 gulp.task('smartgrid', function () {
     var settings = {
-    outputStyle: 'scss',
+    outputStyle: 'less',
         columns: 12,
             tab: "  ",
          offset: "30px", 
@@ -234,9 +240,9 @@ gulp.task('smartgrid', function () {
                'width': '560px',
                'fields': '15px'
            }
-        }
+      }
     };
-    smartgrid('./src/sass/', settings);
+    smartgrid('./src/less/', settings);
 });
 
 

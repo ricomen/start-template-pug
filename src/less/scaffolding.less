@@ -16,13 +16,23 @@ img {
   width: auto;
 }
 .container {
+  max-width: 1200px;
+  padding: 0 10px;
   .center();  
+  box-sizing: border-box;
+  @media @phone {
+    padding: 0 20px;
+  }
 }
 
 a {
   text-decoration: none;
 }
-
+// градиент для текста
+// -------------------
+// -webkit-background-clip: text;
+// -webkit-text-fill-color: transparent;
+// -------------------
 // a {  
 //   text-decoration: none;
 //   background-color: transparent;

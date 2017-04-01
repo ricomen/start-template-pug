@@ -10,7 +10,7 @@ const imagemin       = require('gulp-imagemin');
 const pngquant       = require('imagemin-pngquant');
 const cache          = require('gulp-cache');
 const autoprefixer   = require('gulp-autoprefixer');
-const postcss        = require('gulp-postcss');
+// const postcss        = require('gulp-postcss');
 const plumber        = require('gulp-plumber');
 const csscomb        = require('gulp-csscomb');
 const spritesmith    = require('gulp.spritesmith');
@@ -114,11 +114,11 @@ gulp.task('less', function() {
 });
 
 //PostCSS
-gulp.task('css', function () {
-    return gulp.src('./src/*.css')
-        .pipe(postcss())
-        .pipe(gulp.dest('./dest'));
-});
+// gulp.task('css', function () {
+//     return gulp.src('./src/*.css')
+//         .pipe(postcss())
+//         .pipe(gulp.dest('./dest'));
+// });
 
 //PNG-спрайт(кидает в корень img + css в less/blocks)
 gulp.task('sprite', function () {

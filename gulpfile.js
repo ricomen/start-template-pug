@@ -164,7 +164,7 @@ gulp.task('css-libs', ['less'], function() {
 });
 
 //Основной таск
-gulp.task('watch', ['browser-sync', 'lint'], function() {
+gulp.task('watch', ['browser-sync', 'css-libs'], function() {
   gulp.watch('src/less/**/*.less', ['less']);
   gulp.watch('src/pug/**/*.pug', ['pug']);  
   gulp.watch('src/*.html', browserSync.reload);
@@ -179,7 +179,7 @@ gulp.task('clean', function() {
 
 //Оптимиация изображений
 gulp.task('img', function() {
-  return gulp.src('src/img/*.*')
+  return gulp.src('src/img/**/*.*')
     .pipe(cache(imagemin({
       interlaced: true,
       progressive: true,
@@ -190,7 +190,7 @@ gulp.task('img', function() {
 });
 
 //Выгружаем проект в build
-gulp.task('build', ['clean', 'img', 'less', 'scripts'], function() {
+gulp.task('build', ['clean', 'img', 'css-libs', 'pug'], function() {
 
   var buildCss = gulp.src([ 
       'src/css/*.css',

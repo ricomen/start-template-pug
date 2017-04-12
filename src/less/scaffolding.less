@@ -1,19 +1,21 @@
-html {
-  font-size: @font-size;
-}
+html,
 body {
   margin: 0;
+  padding: 0;
+  font-size: @font-size;
+  height: 100%;
+}
+body {  
   font-family: @font-family;
   word-wrap: break-word;
   //color: ;
-  //background-color: ;
-  //background-image: data-uri("");  
+  //background-color: ;  
   min-width: 320px;
 }
 
 img {
   max-width: 100%;
-  width: auto;
+  height: auto;
 }
 .container {
   max-width: 1200px;//изменть под проект
@@ -30,9 +32,12 @@ h1,h2,h3,h4,h5,h6 {
   font-family: @font-family;
 }
 a {
+  margin: 0;
+  padding: 0;    
   text-decoration: none;
 }
-input {
+input,
+textarea {
   font-family: inherit;
 }
 // градиент для текста

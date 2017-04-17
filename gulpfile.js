@@ -23,6 +23,10 @@ const pug            = require('gulp-pug2');
 const eslint         = require('gulp-eslint');
 const notify         = require('gulp-notify');
 const babel          = require('gulp-babel');
+const sourcemaps     = require('gulp-sourcemaps');
+const gulpIf         = require('gulp-if');
+
+// const isDev = !process.env.NODE_ENV || process.env.NODE_ENV == 'dev';
 
 //ES-Linter
 gulp.task('lint', function () {
@@ -93,7 +97,7 @@ gulp.task('svgSprite', function () {
     .pipe(gulp.dest('src/img/'));
 });
 
-//Шаблонизатор
+//Шаблонизатор Pug
 gulp.task('pug', function() {
   return gulp.src('src/pug/*.pug')
     .pipe(pug({}).on( "error", notify.onError({
@@ -106,18 +110,19 @@ gulp.task('pug', function() {
 //LESS-препроцессор
 gulp.task('less', function() {
   gulp.src('src/less/style.less')
+    .pipe(sourcemaps.init())
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
     .pipe(less())
-    .pipe(autoprefixer(['last 4 versions'], { cascade: true }))
     .pipe(csscomb())
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('src/css'))
 });
 
 //PostCSS
 // gulp.task('css', function () {
-//     return gulp.src('./src/*.css')
-//         .pipe(postcss())
-//         .pipe(gulp.dest('./dest'));
+//   return gulp.src('./src/*.css')
+//     .pipe(postcss())
+//     .pipe(gulp.dest('./dest'));
 // });
 
 //PNG-спрайт(кидает в корень img + css в less/blocks)
@@ -158,13 +163,17 @@ gulp.task('scripts', function() {
 //Минимизируем css, добавляем префикс min
 gulp.task('css-libs', ['less'], function() {
   return gulp.src('src/css/style.css')
-      .pipe(cssnano())
+      .pipe(autoprefixer({
+        browsers: ['last 4 versions'],
+        cascade: false
+      }))      
+      .pipe(cssnano())      
       .pipe(rename({suffix: '.min'}))
       .pipe(gulp.dest('src/css'));
 });
 
 //Основной таск
-gulp.task('watch', ['browser-sync', 'css-libs'], function() {
+gulp.task('watch', ['browser-sync', 'less'], function() {
   gulp.watch('src/less/**/*.less', ['less']);
   gulp.watch('src/pug/**/*.pug', ['pug']);  
   gulp.watch('src/*.html', browserSync.reload);

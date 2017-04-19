@@ -253,6 +253,3 @@ gulp.task('smartgrid', function () {
     };
     smartgrid('./src/less/', settings);
 });
-
-
-

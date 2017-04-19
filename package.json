@@ -41,6 +41,6 @@
     "imagemin-pngquant": "^5.0.0",
     "mkdirp": "^0.5.1",
     "normalize.css": "^6.0.0",
-    "smart-grid": "^1.0.3"
+    "smart-grid": "^1.0.5"
   }
 }

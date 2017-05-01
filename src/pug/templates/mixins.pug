@@ -7,9 +7,10 @@ mixin subscribe(btnText, placeholder, method)
                                   placeholder=placeholder) 
       button.subscribe__btn(type=btnText) #{btnText}
 
-mixin icon(name , size, mod)
+mixin icon(name , w, h, mod)
   - mod = mod || ''
-  svg(width=size height=size class="icon icon-" + name + " " + mod data-img="img/icons/icon-" + name + ".png")
+  - h = h || w
+  svg(width=w height=h class="icon-" + name + " " + mod data-img="img/icons/icon-" + name + ".png")
     use(xlink:href="#icon-" + name)
   noscript
     img(src="img/icons/icon-" + name + ".png" alt="icon" width=size height=size)

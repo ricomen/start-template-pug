@@ -6,3 +6,6 @@ $(window).load(function() {
   /* Act on the event */
 });
 //jQuery end
+(function($){
+  
+})(jQuery);

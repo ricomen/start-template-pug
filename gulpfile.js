@@ -93,7 +93,7 @@ gulp.task('svgSprite', function () {
         },
           parserOptions: { xmlMode: true }
     }))    
-    .pipe(rename('symbol-sprite.html'))
+    .pipe(rename('symbol-sprite.svg'))
     .pipe(gulp.dest('src/img/'));
 });
 
@@ -110,8 +110,8 @@ gulp.task('pug', function() {
 //LESS-препроцессор
 gulp.task('less', function() {
   gulp.src('src/less/style.less')
-    .pipe(sourcemaps.init())
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+    .pipe(sourcemaps.init())
     .pipe(less())
     .pipe(csscomb())
     .pipe(sourcemaps.write())
@@ -164,7 +164,7 @@ gulp.task('scripts', function() {
 gulp.task('css-libs', ['less'], function() {
   return gulp.src('src/css/style.css')
       .pipe(autoprefixer({
-        browsers: ['last 4 versions'],
+        browsers: ['last 8 versions'],
         cascade: false
       }))      
       .pipe(cssnano())      

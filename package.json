@@ -13,8 +13,8 @@
     "url": "https://github.com/ricomen/start-template-pug.git"
   },
   "devDependencies": {
-    "autoprefixer": "^7.0.0",
-    "browser-sync": "^2.18.8",
+    "autoprefixer": "^7.1.1",
+    "browser-sync": "^2.18.11",
     "css-mqpacker": "^6.0.0",
     "cssgrace": "^3.0.0",
     "del": "^2.2.2",
@@ -39,6 +39,7 @@
     "gulp.spritesmith": "^6.4.0",
     "imagemin-pngquant": "^5.0.0",
     "mkdirp": "^0.5.1",
-    "normalize.css": "^6.0.0"
+    "normalize.css": "^6.0.0",
+    "smart-grid": "^1.0.5"
   }
 }

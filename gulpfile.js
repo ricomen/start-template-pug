@@ -87,7 +87,7 @@ gulp.task('sprite', function () {
   var spriteData = gulp.src('src/img/icons/for-sprite/*.png')
   .pipe(spritesmith({
     imgName: '../img/sprite.png',
-    cssName: 'sprite.css',
+    cssName: 'sprite.less',
     cssFormat: 'css',
     algorithm: 'top-down',
     padding: 10

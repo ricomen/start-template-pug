@@ -14,10 +14,10 @@
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
-    "browser-sync": "^2.18.11",
-    "css-mqpacker": "^6.0.0",
+    "browser-sync": "^2.18.12",
+    "css-mqpacker": "^6.0.1",
     "cssgrace": "^3.0.0",
-    "del": "^2.2.2",
+    "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-cache": "^0.4.6",
     "gulp-cheerio": "^0.6.2",
@@ -34,12 +34,12 @@
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
     "gulp-sourcemaps": "^2.6.0",
-    "gulp-svgmin": "^1.2.3",
+    "gulp-svgmin": "^1.2.4",
     "gulp-svgstore": "^6.1.0",
-    "gulp.spritesmith": "^6.4.0",
+    "gulp.spritesmith": "^6.5.0",
     "imagemin-pngquant": "^5.0.0",
     "mkdirp": "^0.5.1",
-    "normalize.css": "^6.0.0",
-    "smart-grid": "^1.0.5"
+    "normalize.css": "^7.0.0",
+    "smart-grid": "^1.1.0"
   }
 }

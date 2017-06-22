@@ -113,8 +113,14 @@
 .add-font(@font-url, @font-name, @font-weight: normal, @font-style: normal) {
   font-family: @font-name;  
   src: 
-  url('@{font-folder}@{font-url}.woff') format('woff'),
-  url('@{font-folder}@{font-url}.woff2') format('woff2');
+  url('@{font-folder}@{font-url}.woff2') format('woff2'),
+  url('@{font-folder}@{font-url}.woff') format('woff');
   font-weight: @font-weight;
   font-style: @font-style;
+}
+
+.text-overflow() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

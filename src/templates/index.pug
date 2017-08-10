@@ -1,0 +1,13 @@
+extends layouts/layout
+include mixins/mixins
+
+block title 
+  title Главная
+
+block main
+  include includes/page-header
+  include includes/page-main
+  include includes/page-footer
+  
+block script  
+  script(src="js/app.js")

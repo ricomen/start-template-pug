@@ -1,16 +1,21 @@
+html {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
 html,
 body {
   height: 100%;
-  
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
 }
 body {  
   margin: 0;
   padding: 0;
-  font-size: @font-size;
-  font-family: @font-family;  
-  //color: ;
-  //background-color: ;  
   min-width: 320px;
+  font-size: @fs;
+  font-family: @Ubuntu;
+  color: #3f3d3d;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 
@@ -18,16 +23,20 @@ img {
   max-width: 100%;
   height: auto;
   border: none;
+  vertical-align: bottom;
 }
 .container {
-  .center();
-  padding: 0 10px;
-  max-width: 1200px;//изменть под проект
+  max-width: 1170px;//изменть под проект
+  padding: 0 15px;
+  .center();  
   box-sizing: border-box;
+  
+  @media @tablet {
+    // margin: 0 15px;
+  }
 }
 h1,h2,h3,h4,h5,h6 {
-  margin: 0;
-  font-family: @font-family;
+  margin: 0;  
 }
 a {
   margin: 0;

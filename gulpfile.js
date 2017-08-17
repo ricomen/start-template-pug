@@ -179,10 +179,12 @@ gulp.task('watch', ['dev'], () => {
   gulp.watch('src/png-sprite-icons/*.png', ['png:sprite']);
   gulp.watch('src/img/*.{png, jpg, jpeg, svg}', ['img']);
   gulp.watch('src/svg-sprite-icons/*.svg', ['svg:sprite']);
+  gulp.watch('src/fonts/**/*.*', ['fonts']);
   gulp.watch('build/*.html', browserSync.reload);
   gulp.watch('build/img/**/*.*', browserSync.reload);
   gulp.watch('build/css/*.css', browserSync.reload);
   gulp.watch('build/js/**/*.js', browserSync.reload);
+  gulp.watch('build/fonts/**/*.*', browserSync.reload);
 });
 
 /*

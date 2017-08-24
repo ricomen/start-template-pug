@@ -264,12 +264,12 @@ gulp.task('smartgrid', () => {
     outputStyle: 'less',
         columns: 12,
             tab: "  ",
-         offset: "30px", 
-      container: {maxWidth: '1200px', fields: '30px'},
+         offset: "15px", 
+      container: {maxWidth: '1170px', fields: '15px'},
     breakPoints: {
         lg: {
-          'width': '1100px', /* -> @media (max-width: 1100px) */
-          'fields': '30px' /* side fields */
+          'width': '1199px', /* -> @media (max-width: 1100px) */
+          'fields': '15px' /* side fields */
         },
         md: {
           'width': '960px',

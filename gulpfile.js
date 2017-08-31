@@ -171,23 +171,6 @@ gulp.task('css-libs', () => {
 });
 
 /*
-  Watch
- */
-gulp.task('watch', ['dev'], () => {
-  gulp.watch('src/less/**/*.less', ['less']);
-  gulp.watch('src/templates/**/*.pug', ['pug']);
-  gulp.watch('src/png-sprite-icons/*.png', ['png:sprite']);
-  gulp.watch('src/img/*.{png, jpg, jpeg, svg}', ['img']);
-  gulp.watch('src/svg-sprite-icons/*.svg', ['svg:sprite']);
-  gulp.watch('src/fonts/**/*.*', ['fonts']);
-  gulp.watch('build/*.html', browserSync.reload);
-  gulp.watch('build/img/**/*.*', browserSync.reload);
-  gulp.watch('build/css/*.css', browserSync.reload);
-  gulp.watch('build/js/**/*.js', browserSync.reload);
-  gulp.watch('build/fonts/**/*.*', browserSync.reload);
-});
-
-/*
   Clean
  */
 gulp.task('clean', () => {
@@ -197,16 +180,17 @@ gulp.task('clean', () => {
 /*
   Fonts
  */
-gulp.task('fonts', () => {
-  gulp.src(['src/fonts/**/*', '!src/fonts/**/*.less'])
-  .pipe(gulp.dest('build/fonts'))
+gulp.task('fonts', () => {  
+  console.log("red");
+  return gulp.src('src/fonts/**/*.+(ttf|eot|woff|woff2)')
+  .pipe(gulp.dest('build/fonts'));
 });
 
 /*
   Image optimaze
  */
 gulp.task('img', () => {
-  return gulp.src('src/img/**/*.{svg,jpg,jpeg,png}')
+  return gulp.src('src/img/**/*.+(jpeg|jpg|png|svg)')
     .pipe(gulpIf(!isDev, cache(imagemin({
       interlaced: true,
       progressive: true,
@@ -215,6 +199,34 @@ gulp.task('img', () => {
   }))))
     .pipe(gulp.dest('build/img'));
 });
+
+/*
+  Watch
+ */
+gulp.task('watch', ['dev'], () => {
+  gulp.watch('src/less/**/*.less', ['less']);
+
+  gulp.watch('src/templates/**/*.pug', ['pug']);
+
+  gulp.watch('src/png-sprite-icons/*.png', ['png:sprite']);
+
+  gulp.watch('src/svg-sprite-icons/*.svg', ['svg:sprite']);
+
+  gulp.watch('src/img/**/*.+(jpeg|jpg|png|svg)', ['img']);
+
+  gulp.watch('src/fonts/**/*.+(ttf|eot|woff|woff2)', ['fonts']);
+
+  gulp.watch('build/*.html', browserSync.reload);
+
+  gulp.watch('build/css/*.css', browserSync.reload);
+
+  gulp.watch('build/js/**/*.js', browserSync.reload);
+
+  gulp.watch('build/img/**/*.+(jpeg|jpg|png|svg)', browserSync.reload);
+  
+  gulp.watch('build/fonts/**/*.+(ttf|eot|woff|woff2)', browserSync.reload);
+});
+
 
 /**
  * Development

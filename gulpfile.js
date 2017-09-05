@@ -9,6 +9,7 @@ const cheerio       = require('gulp-cheerio');
 const concat        = require('gulp-concat');
 const csscomb       = require('gulp-csscomb');
 const cssnano       = require('gulp-cssnano');
+const changed       = require('gulp-changed');
 const gulpIf        = require('gulp-if');
 const imagemin      = require('gulp-imagemin');
 const notify        = require('gulp-notify');
@@ -129,7 +130,7 @@ gulp.task('svg:sprite', () => {
           parserOptions: { xmlMode: true }
     }))    
     .pipe(rename('symbol-sprite.html'))
-    .pipe(gulp.dest('bulid/img'));
+    .pipe(gulp.dest('build/img'));
 });
 
 /*
@@ -137,6 +138,7 @@ gulp.task('svg:sprite', () => {
  */
 gulp.task('png:sprite', () => {
   var spriteData = gulp.src('src/png-sprite-icons/*.png')
+  .pipe(changed('build/img/'))
   .pipe(spritesmith({
     imgName: '../img/sprite.png',
     cssName: 'sprite.less',
@@ -180,9 +182,9 @@ gulp.task('clean', () => {
 /*
   Fonts
  */
-gulp.task('fonts', () => {  
-  console.log("red");
+gulp.task('fonts', () => {    
   return gulp.src('src/fonts/**/*.+(ttf|eot|woff|woff2)')
+  .pipe(changed('build/fonts'))
   .pipe(gulp.dest('build/fonts'));
 });
 
@@ -191,6 +193,7 @@ gulp.task('fonts', () => {
  */
 gulp.task('img', () => {
   return gulp.src('src/img/**/*.+(jpeg|jpg|png|svg)')
+    .pipe(changed('build/img'))
     .pipe(gulpIf(!isDev, cache(imagemin({
       interlaced: true,
       progressive: true,
@@ -208,13 +211,13 @@ gulp.task('watch', ['dev'], () => {
 
   gulp.watch('src/templates/**/*.pug', ['pug']);
 
-  gulp.watch('src/png-sprite-icons/*.png', ['png:sprite']);
+  gulp.watch('src/png-sprite-icons/*.*', ['png:sprite']);
 
-  gulp.watch('src/svg-sprite-icons/*.svg', ['svg:sprite']);
+  gulp.watch('src/svg-sprite-icons/*.*', ['svg:sprite']);
 
-  gulp.watch('src/img/**/*.+(jpeg|jpg|png|svg)', ['img']);
+  gulp.watch('src/img/**/*.*', ['img']);   
 
-  gulp.watch('src/fonts/**/*.+(ttf|eot|woff|woff2)', ['fonts']);
+  gulp.watch('src/fonts/**/*.*', ['fonts']);
 
   gulp.watch('build/*.html', browserSync.reload);
 
@@ -222,9 +225,10 @@ gulp.task('watch', ['dev'], () => {
 
   gulp.watch('build/js/**/*.js', browserSync.reload);
 
-  gulp.watch('build/img/**/*.+(jpeg|jpg|png|svg)', browserSync.reload);
+  gulp.watch('build/img/**/*.*', browserSync.reload);
   
-  gulp.watch('build/fonts/**/*.+(ttf|eot|woff|woff2)', browserSync.reload);
+  gulp.watch('build/fonts/**/*.*', browserSync.reload);
+ 
 });
 
 
@@ -235,6 +239,8 @@ gulp.task('dev', () => {
   runSequence(
     'clear',
     'img',
+    'svg:sprite',
+    'png:sprite',
     'fonts',
     'less',
     'css-libs',
@@ -251,6 +257,8 @@ gulp.task('build', () => {
   runSequence(
     'clean',
     'img',
+    'svg:sprite',
+    'png:sprite',
     'fonts',
     'less',
     'css-libs',

@@ -192,7 +192,7 @@ gulp.task('fonts', () => {
   Image optimaze
  */
 gulp.task('img', () => {
-  return gulp.src('src/img/**/*.+(jpeg|jpg|png|svg)')
+  return gulp.src('src/img/**/*.+(jpeg|jpg|png|svg|gif)')
     .pipe(changed('build/img'))
     .pipe(gulpIf(!isDev, cache(imagemin({
       interlaced: true,
